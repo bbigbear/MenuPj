@@ -100,15 +100,15 @@
 					    </div>					    
 					  </div>
 					<div class="layui-inline" style="padding-left:30px">
-						<button class="layui-btn">
+						<button class="layui-btn" id="search">
 						  <i class="layui-icon">&#xe615;</i> 查询
 						</button>
 					</div>
 					</div>
 					<div style="padding-top:20px">
 					<span class="layui-breadcrumb" lay-separator="|">					
-					  <i class="layui-icon">&#xe642;</i>
-					  <a href="">编辑</a>				
+					  <i class="layui-icon">&#xe61f;</i>
+					  <a id="add">新增</a>				
 					  <i class="layui-icon">&#xe62f;</i>
 					  <a href="">上架</a>					
 					  <i class="layui-icon">&#xe640;</i>
@@ -116,41 +116,29 @@
 					</span>
 					</div>	
 					<div>
-					<table class="layui-table">
-						  <colgroup>
-						    <col width="150">
-						    <col width="200">
-						    <col>
-						  </colgroup>
-						  <thead>
-						    <tr>
-						      <th>昵称</th>
-						      <th>加入时间</th>
-						      <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-							  <th>签名</th>
-						    </tr> 
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <td>贤心</td>
-						      <td>2016-11-29</td>
-						      <td>人生就像是一场修行</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-							  <td>2016-11-29</td>
-						    </tr>
-						  </tbody>
-						</table>
+					<table class="layui-table" lay-data="{width: 892, height:332, url:'/demo/table/user/', page:true, id:'idTest'}" lay-filter="demo">
+					  <thead>
+					    <tr>
+					      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+					      <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+					      <th lay-data="{field:'username', width:80}">用户名</th>
+					      <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
+					      <th lay-data="{field:'city', width:80}">城市</th>
+					      <th lay-data="{field:'sign', width:160}">签名</th>
+					      <th lay-data="{field:'experience', width:80, sort: true}">积分</th>
+					      
+					      <th lay-data="{field:'classify', width:80}">职业</th>
+					      <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
+					      <th lay-data="{field:'score', width:80, sort: true, fixed: 'right'}">评分</th>
+					      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+					    </tr>
+					  </thead>
+					</table>
+					<script type="text/html" id="barDemo">
+					  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+					  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+					  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					</script>
 					</div>				
 				  </div>
 				  <div class="layui-tab-item">3</div>
@@ -170,12 +158,41 @@
   </div>
 </div>
 <script src="/static/layui.js"></script>
+<!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
 <script>
-//JavaScript代码区域
-layui.use('element', function(){
-  var element = layui.element;
-  
-});
+	//JavaScript代码区域
+	layui.use(['element','layer','jquery'], function(){
+	  var element = layui.element
+		,layer=layui.layer
+		,$=layui.jquery;
+	  //layer.msg("你好");
+	$('#add').on('click',function(){
+		//layer.msg("点击添加按钮");
+		//iframe窗
+		layer.open({
+		  type: 2,
+		  title: false,
+		  //closeBtn: 0, //不显示关闭按钮
+		  shadeClose: true,
+		  shade: false,
+		  area: ['893px', '600px'],
+		 // offset: 'rb', //右下角弹出
+		  //time: 2000, //2秒后自动关闭
+		  maxmin: true,
+		  anim: 2,
+		  content: ['/views/addDish.tpl'], //iframe的url，no代表不显示滚动条
+		  cancel: function(index, layero){ 
+		  if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+		    layer.close(index)
+		  }
+		  return false; 
+		  },
+		});
+	});
+	});
+	
+	
 </script>
+
 </body>
 </html>
