@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/astaxie/beego"
 )
 
@@ -55,4 +58,22 @@ func (this *BaseController) RemoveRepBySlice(slc []string) []string {
 		}
 	}
 	return result
+}
+
+// 图片接口
+func (this *BaseController) PutFileImg() {
+	h, err := this.GetFiles("file")
+	fmt.Println("文件名称", h[0].Filename)
+	fmt.Println("文件大小", h[0].Size)
+	if err != nil {
+		log.Fatal("getfile err ", err)
+	}
+	//	defer f.Close()
+	path := "static/upload/" + h[0].Filename
+	this.SaveToFile("file", path) // 保存位置在 static/upload, 没有文件夹要先创建
+	list := make(map[string]interface{})
+	list["src"] = path
+	list["name"] = h[0].Filename
+	list["size"] = h[0].Size
+	this.ajaxList("图片上传成功", MSG_OK, 1, list)
 }

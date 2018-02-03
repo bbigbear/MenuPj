@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>表单模块 - layui</title>
+  <title>新增菜品</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -74,8 +74,10 @@ body{padding: 10px;}
 	<label class="layui-form-label">菜品图片</label>
 	<div class="layui-upload-list" id="demo2">
     	<button class="layui-btn layui-btn-primary" id="test2" style="width:80px;height:80px;"><i class="layui-icon">&#xe654;</i></button>
+		<input type="file" name="file" class="layui-upload-file">
 	</div>
 	</div>
+	<button class="layui-btn layui-btn-primary" id="btn1" style="width:80px;height:80px;">图片上传</button>
 	<label class="layui-form-mid layui-word-aux" style="margin-left:40px;">点击图片可进行删除，最多只能上传10张，大小不能超过3M</label>
   </div>
   <div class="layui-form-item layui-form-text">
@@ -91,7 +93,7 @@ body{padding: 10px;}
     </div>
 	<div class="layui-input-block">
       <input type="radio" name="sex" value="自定义上架时间" title="自定义上架时间">
-	  <input type="text" name="date" id="date" lay-verify="date" placeholder="选择上架售卖时间" autocomplete="off" class="layui-input"  style="width: 140px;margin-left:10px;"> 
+	  <input type="text" name="date" id="date" lay-verify="date" placeholder="选择上架售卖时间" autocomplete="off" class="layui-input"  style="width: 150px;margin-left:10px;"> 
 	</div>
 	<div class="layui-input-block">
       <input type="radio" name="sex" value="暂不售卖，放入仓库" title="暂不售卖，放入仓库">
@@ -122,18 +124,21 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 	//日期
 	laydate.render({
 		elem:'#date'
+		,type: 'datetime'
 	}); 
 	
 	//图片上传
+	  var path_src=""
 	  upload.render({
 	    elem: '#test2'
-	    ,url: ''
+	    ,url: '/v1/put_img'
 	    ,multiple: true
 		,exts: 'jpg|png|gif|bmp|jpeg'
 		,auto:false
 	    ,number: 10
 	    ,size: 3*1024
-		,bindAction: '#btn'
+		,bindAction: '#btn1'
+		//,field:'myfile'
 	    ,choose: function(obj){
 	      //预读本地文件示例，不支持ie8
 	      obj.preview(function(index, file, result){
@@ -146,9 +151,12 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 	    }
 	    ,done: function(res){
 	      //上传完毕
+			console.log(res);
+			path_src=path_src+res.data.src+',';	
 	    }
 	    ,allDone: function(obj){
-	      console.log(obj)
+	      	//alert(path_src)
+			console.log(obj)
 	    }
 	  }); 
 	//文本域
