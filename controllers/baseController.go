@@ -67,6 +67,7 @@ func (this *BaseController) PutFileImg() {
 	fmt.Println("文件大小", h[0].Size)
 	if err != nil {
 		log.Fatal("getfile err ", err)
+		this.ajaxMsg(h[0].Filename+"图片上传失败", MSG_ERR_Resources)
 	}
 	//	defer f.Close()
 	path := "static/upload/" + h[0].Filename

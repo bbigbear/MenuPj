@@ -171,7 +171,7 @@
 		//iframe窗
 		layer.open({
 		  type: 2,
-		  title: false,
+		  title: '新增菜单',
 		  //closeBtn: 0, //不显示关闭按钮
 		  shadeClose: true,
 		  shade: false,
@@ -180,7 +180,7 @@
 		  //time: 2000, //2秒后自动关闭
 		  maxmin: true,
 		  anim: 2,
-		  content: ['/views/addDish.tpl'], //iframe的url，no代表不显示滚动条
+		  content: ['/v1/dish/add_show'], //iframe的url，no代表不显示滚动条
 		  cancel: function(index, layero){ 
 		  if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
 		    layer.close(index)

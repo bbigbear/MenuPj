@@ -7,6 +7,7 @@ import (
 	"MenuPj/models"
 
 	_ "github.com/Go-SQL-Driver/MySQL"
+	"github.com/alecthomas/log4go"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
@@ -14,6 +15,9 @@ import (
 func init() {
 	DBConnection()
 	RegisterModel()
+	//初始化日志
+	log4go.LoadConfiguration("log4go.xml")
+	log4go.Info("log4go init ok")
 }
 
 func main() {
