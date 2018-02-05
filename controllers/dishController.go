@@ -49,3 +49,62 @@ func (this *DishController) Add_Action() {
 	return
 
 }
+
+func (this *DishController) Edit_Show() {
+	fmt.Println("点击菜品编辑")
+	o := orm.NewOrm()
+	var maps []orm.Params
+	dish := new(models.Dish)
+
+	id := this.Input().Get("id")
+	fmt.Println("id:", id)
+
+	num, err := o.QueryTable(dish).Filter("Id", id).Values(&maps)
+	if err != nil {
+		log4go.Stdout("编辑菜品失败", err.Error())
+		this.ajaxMsg("编辑失败", MSG_ERR_Resources)
+	}
+	fmt.Println("edit dish reslut num:", num)
+	this.Data["dish_info"] = maps
+	for _, m := range maps {
+		this.Data["c"] = m["Classify"]
+		this.Data["u"] = m["Unit"]
+		this.Data["i"] = m["Info"]
+		this.Data["s"] = m["Status"]
+		this.Data["p"] = m["Pic_path"]
+	}
+	this.TplName = "editDish.tpl"
+	return
+}
+
+func (this *DishController) Edit_Action() {
+	this.TplName = "addDish.tpl"
+}
+
+func (this *DishController) Show() {
+	fmt.Println("点击菜品编辑")
+	o := orm.NewOrm()
+	var maps []orm.Params
+	dish := new(models.Dish)
+
+	id := this.Input().Get("id")
+	fmt.Println("id:", id)
+
+	num, err := o.QueryTable(dish).Filter("Id", id).Values(&maps)
+	if err != nil {
+		log4go.Stdout("编辑菜品失败", err.Error())
+		this.ajaxMsg("编辑失败", MSG_ERR_Resources)
+	}
+	fmt.Println("edit dish reslut num:", num)
+	this.Data["dish_info"] = maps
+	for _, m := range maps {
+		this.Data["c"] = m["Classify"]
+		this.Data["u"] = m["Unit"]
+		this.Data["i"] = m["Info"]
+		this.Data["s"] = m["Status"]
+		this.Data["p"] = m["Pic_path"]
+	}
+	this.TplName = "showDish.tpl"
+	return
+
+}

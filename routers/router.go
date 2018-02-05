@@ -15,4 +15,8 @@ func init() {
 	//dish
 	beego.Router("/v1/dish/add_show", &controllers.DishController{}, "*:Add_Show")
 	beego.Router("/v1/dish/add_action", &controllers.DishController{}, "*:Add_Action")
+	beego.Router("/v1/dish/edit_show", &controllers.DishController{}, "*:Edit_Show")
+	beego.Router("/v1/dish/edit_action", &controllers.DishController{}, "*:Edit_Action")
+	beego.Router("/v1/dish/edit_show", &controllers.DishController{}, "*:Edit_Show")
+	beego.Router("/v1/dish/show", &controllers.DishController{}, "*:Show")
 }

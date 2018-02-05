@@ -18,6 +18,9 @@ func init() {
 	//初始化日志
 	log4go.LoadConfiguration("log4go.xml")
 	log4go.Info("log4go init ok")
+
+	beego.SetStaticPath("/upload", "images")
+
 }
 
 func main() {

@@ -17,21 +17,22 @@ body{padding: 10px;}
 </style>
 </head>
 <body>
-<form class="layui-form layui-form-pane1" action="">
+{{range .dish_info}}
+<form class="layui-form layui-form-pane1" action="" id="dish_show">
   <div class="layui-form-item">
     <label class="layui-form-label">菜品名称</label>
     <div class="layui-input-block">
 <!--     <input type="text" name="title" lay-verify="required|title" required placeholder="标题不超过20个汉字" autocomplete="off" class="layui-input">-->
-	  <input type="text" name="Name" id="name" placeholder="标题不超过20个汉字" autocomplete="off" class="layui-input">
+	  <input type="text" name="Name" id="name" value="{{.Name}}" placeholder="标题不超过20个汉字" autocomplete="off" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
     <div class="layui-inline">
       <label class="layui-form-label">菜单分类</label>
       <div class="layui-input-block">
-        <select name="Classify" id="classify" lay-verType="tips">
-          <option value="荤菜">荤菜</option>
-          <option value="素菜">素菜</option>
+        <select name="Classify" id="classify" value="{{.Classify}}" lay-verType="tips">
+          <option>荤菜</option>
+          <option>素菜</option>
         </select>
       </div>
     </div>
@@ -40,7 +41,7 @@ body{padding: 10px;}
     <div class="layui-inline">
       <label class="layui-form-label">菜品售价</label>
       <div class="layui-input-inline" style="width: 100px;">
-        <input type="text" name="Sell_price" id="sell_price" placeholder="￥" autocomplete="off" class="layui-input">
+        <input type="text" name="Sell_price" id="sell_price" value="{{.Sell_price}}" placeholder="￥" autocomplete="off" class="layui-input">
       </div>
     </div>
   </div>
@@ -48,19 +49,19 @@ body{padding: 10px;}
     <div class="layui-inline">
       <label class="layui-form-label">菜品原价</label>
       <div class="layui-input-inline" style="width: 100px;">
-        <input type="text" name="Original_price" id="original_price" placeholder="￥" autocomplete="off" class="layui-input">
+        <input type="text" name="Original_price" id="original_price" value="{{.Original_price}}" placeholder="￥" autocomplete="off" class="layui-input">
       </div>
     </div>
   </div>
   <div class="layui-form-item">
     <label class="layui-form-label">菜品库存</label>
     <div class="layui-input-inline" style="width: 100px;">
-        <input type="text" name="Stocks" id="stocks" autocomplete="off" class="layui-input">		
+        <input type="text" name="Stocks" id="stocks" autocomplete="off" value="{{.Stocks}}" class="layui-input">		
     </div>
 	<div class="layui-input-inline" style="width: 80px;">
-		<select name="Unit" id="unit" lay-verType="tips">
-          <option value="份">份</option>
-          <option value="盒">盒</option>
+		<select name="Unit" id="unit" value="{{.Unit}}" lay-verType="tips">
+          <option>份</option>
+          <option>盒</option>
         </select>
 	</div>
 	<div class="layui-form-mid layui-word-aux">库存为0时，会放入【售罄】的菜单列表</div>
@@ -74,7 +75,7 @@ body{padding: 10px;}
 	 </blockquote>-->
 	<label class="layui-form-label">菜品图片</label>
 	<div class="layui-upload-list" id="demo2">
-    	<button class="layui-btn layui-btn-primary" id="test2" style="width:80px;height:80px;"><i class="layui-icon">&#xe654;</i></button>
+<!--    	<button class="layui-btn layui-btn-primary" id="test2" style="width:80px;height:80px;"><i class="layui-icon">&#xe654;</i></button>-->
 		<input type="file" name="file" id="file[]" class="layui-upload-file">
 	</div>
 	</div>
@@ -84,7 +85,7 @@ body{padding: 10px;}
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">菜品描述</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入内容" class="layui-textarea" name="Info" id="info"></textarea>
+      <textarea placeholder="请输入内容" class="layui-textarea" name="Info" id="info" value="{{.Info}}"></textarea>
     </div>
   </div>
   <div class="layui-form-item" pane>
@@ -94,7 +95,7 @@ body{padding: 10px;}
     </div>
 	<div class="layui-input-block">
       <input type="radio" name="Status" value="1" title="自定义上架时间">
-	  <input type="text" name="Time" id="time" lay-verify="date" placeholder="选择上架售卖时间" autocomplete="off" class="layui-input"  style="width: 150px;margin-left:10px;"> 
+	  <input type="text" name="Time" id="time" value="{{.Time}}"  lay-verify="date" placeholder="选择上架售卖时间" autocomplete="off" class="layui-input"  style="width: 150px;margin-left:10px;"> 
 	</div>
 	<div class="layui-input-block">
       <input type="radio" name="Status" value="2" title="暂不售卖，放入仓库">
@@ -102,13 +103,13 @@ body{padding: 10px;}
   </div>
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" id="add">确认</button>
+<!--      <button class="layui-btn" id="add">确认</button>-->
 <!--	  <input type="hidden" id="pic_path">-->
 <!--      <button type="reset" class="layui-btn layui-btn-primary">关闭</button>-->
     </div>
   </div>
 </form>
-
+{{end}}
 <br><br><br>
 
 
@@ -122,13 +123,44 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
   ,upload = layui.upload
   , $ = layui.jquery
   ,layedit=layui.layedit;
+	//文本域
+	//var index=layedit.build('info',{
+	//	hideTool:['image']
+	//});
   
 	//日期
-	laydate.render({
-		elem:'#time'
-		,type: 'datetime'
-	}); 
-	
+	//laydate.render({
+	//	elem:'#time'
+	//	,type: 'datetime'
+	//});
+    	//初始化
+ 	$(function(){
+		//alert({{.c}})
+		//alert({{.u}})
+		//alert({{.i}})
+		$("#classify").val({{.c}})
+		$("#unit").val({{.u}})
+		//$("input[name='Status']:checked").val({{.s}})
+		//$("input[name='Status'][value='{{.s}}']").attr('checked', true);
+		$("input[name='Status'][value={{.s}}]").attr("checked",true);
+		$("#info").val({{.i}})
+		//layedit.build('info'); 
+		if({{.s}}!="1"){
+			$("#time").val("")
+		}
+		var list={{.p}}.split(',')
+		//alert(list[0])
+		for(var i=0;i<list.length-1;i++){
+			$('#demo2').append('<img src="'+"/"+list[i]+'" id="upload_img_'+i+'" style="width:80px;height:80px;padding-left:10px;">')
+			//$("#upload_img_"+i).bind('click',function(){             
+              //  $(this).remove();
+            // });
+		}
+		$("#dish_show").find(":text,input:file,:radio,:checkbox,textarea,select,button").attr("readonly","true");	
+		$("#dish_show").find(":text,input:file,:radio,:checkbox,textarea,select,button").attr("disabled","true");	
+		form.render();
+	});
+
 	//图片上传
 	  var path_src=""
 	  var uploadList=upload.render({
@@ -173,10 +205,7 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 			
 	    }
 	  }); 
-	//文本域
-	var index=layedit.build('info',{
-		hideTool:['image']
-	});
+
 	//添加图片
 	$('#test2').on('click',function(){
 		return false;//禁止form自动提交

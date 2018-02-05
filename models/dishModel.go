@@ -9,7 +9,7 @@ type Dish struct {
 	Sell_price     float64 `orm:"index"`
 	Stocks         int64
 	Unit           string
-	Info           string
+	Info           string `orm:"size(5000)"`
 	Status         int
 	Time           string
 }
