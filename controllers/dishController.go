@@ -17,7 +17,7 @@ type DishController struct {
 }
 
 func (this *DishController) Get() {
-	this.TplName = "addDish.tpl"
+	this.TplName = "home.tpl"
 }
 
 func (this *DishController) Add_Show() {

@@ -64,13 +64,13 @@
       </ul>
     </div>
   </div>
-  
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
 		<div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+<!--		  <button class="layui-btn layui-btn-disabled">个人中心</button>-->
 		  <ul class="layui-tab-title">
-		    <li lay-id="11">个人中心</li>
+		   <li lay-id="11" >个人中心</li>
 		    <li class="layui-this" lay-id="22">菜单列表</li>
 		  </ul>
 		  <div class="layui-tab-content">
@@ -90,17 +90,17 @@
 					  <div class="layui-inline">
 					    <label class="layui-form-label">菜单名称</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min"  autocomplete="off" class="layui-input">						 
+					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
 					    </div>				    
 					  </div>
 					 <div class="layui-inline">
 					    <label class="layui-form-label">菜单价格</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min"  autocomplete="off" class="layui-input">
+					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
 					    </div>					    
 					  </div>
 					<div class="layui-inline" style="padding-left:30px">
-						<button class="layui-btn" id="search">
+						<button class="layui-btn" id="search" data-type="reload">
 						  <i class="layui-icon">&#xe615;</i> 查询
 						</button>
 					</div>
@@ -108,7 +108,7 @@
 					<div style="padding-top:20px">
 					<span class="layui-breadcrumb" lay-separator="|">					
 					  <i class="layui-icon">&#xe61f;</i>
-					  <a id="add">新增</a>				
+					  <a id="add">新增</a>	
 					  <i class="layui-icon">&#xe62f;</i>
 					  <a href="">上架</a>					
 					  <i class="layui-icon">&#xe640;</i>
@@ -116,33 +116,91 @@
 					</span>
 					</div>	
 					<div>
-					<table class="layui-table" lay-data="{width: 892, height:332, url:'/demo/table/user/', page:true, id:'idTest'}" lay-filter="demo">
-					  <thead>
-					    <tr>
-					      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-					      <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-					      <th lay-data="{field:'username', width:80}">用户名</th>
-					      <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-					      <th lay-data="{field:'city', width:80}">城市</th>
-					      <th lay-data="{field:'sign', width:160}">签名</th>
-					      <th lay-data="{field:'experience', width:80, sort: true}">积分</th>
-					      
-					      <th lay-data="{field:'classify', width:80}">职业</th>
-					      <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
-					      <th lay-data="{field:'score', width:80, sort: true, fixed: 'right'}">评分</th>
-					      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
-					    </tr>
-					  </thead>
+					<table id="saleList" lay-filter="sale">				  
 					</table>
 					<script type="text/html" id="barDemo">
-					  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-					  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-					  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 					</script>
 					</div>				
 				  </div>
-				  <div class="layui-tab-item">3</div>
-				  <div class="layui-tab-item">4</div>
+				  <div class="layui-tab-item">
+				    <div>
+					  <div class="layui-inline">
+					    <label class="layui-form-label">菜单名称</label>
+					    <div class="layui-input-inline" style="width: 100px;">
+					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
+					    </div>				    
+					  </div>
+					 <div class="layui-inline">
+					    <label class="layui-form-label">菜单价格</label>
+					    <div class="layui-input-inline" style="width: 100px;">
+					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
+					    </div>					    
+					  </div>
+					<div class="layui-inline" style="padding-left:30px">
+						<button class="layui-btn" id="search" data-type="reload">
+						  <i class="layui-icon">&#xe615;</i> 查询
+						</button>
+					</div>
+					</div>
+					<div style="padding-top:20px">
+					<span class="layui-breadcrumb" lay-separator="|">					
+					  <i class="layui-icon">&#xe601;</i>
+					  <a id="add">下架</a>						  
+					</span>
+					</div>	
+					<div>
+					<table id="saleList" lay-filter="sale">				  
+					</table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					</script>
+					</div>
+				  </div>
+				  <div class="layui-tab-item">
+				    <div>
+					  <div class="layui-inline">
+					    <label class="layui-form-label">菜单名称</label>
+					    <div class="layui-input-inline" style="width: 100px;">
+					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
+					    </div>				    
+					  </div>
+					 <div class="layui-inline">
+					    <label class="layui-form-label">菜单价格</label>
+					    <div class="layui-input-inline" style="width: 100px;">
+					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
+					    </div>					    
+					  </div>
+					<div class="layui-inline" style="padding-left:30px">
+						<button class="layui-btn" id="search" data-type="reload">
+						  <i class="layui-icon">&#xe615;</i> 查询
+						</button>
+					</div>
+					</div>
+					<div style="padding-top:20px">
+					<span class="layui-breadcrumb" lay-separator="|">					
+					  <i class="layui-icon">&#xe639;</i>
+					  <a id="add">编辑</a>	
+					  <i class="layui-icon">&#xe62f;</i>
+					  <a href="">上架</a>					
+					  <i class="layui-icon">&#xe640;</i>
+					  <a href="">删除</a>
+					</span>
+					</div>	
+					<div>
+					<table id="saleList" lay-filter="sale">				  
+					</table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					</script>
+					</div>
+				  </div>
 				</div>
 				</div> 
 			</div>
@@ -154,24 +212,31 @@
   <div class="layui-footer">
     <!-- 底部固定区域 -->
     ©2018 智慧校园. All Rights Reserved
-
   </div>
 </div>
+<style>
+	.layui-tab-title li:first-child > i {
+		display: none;
+		disabled:true
+	}
+</style>
+
 <script src="/static/layui.js"></script>
 <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
 <script>
 	//JavaScript代码区域
-	layui.use(['element','layer','jquery'], function(){
+	layui.use(['element','layer','jquery','table'], function(){
 	  var element = layui.element
 		,layer=layui.layer
-		,$=layui.jquery;
+		,$=layui.jquery
+		,table=layui.table;
 	  //layer.msg("你好");
 	$('#add').on('click',function(){
 		//layer.msg("点击添加按钮");
 		//iframe窗
 		layer.open({
 		  type: 2,
-		  title: '新增菜单',
+		  title: '新增菜品',
 		  //closeBtn: 0, //不显示关闭按钮
 		  shadeClose: true,
 		  shade: false,
@@ -189,7 +254,137 @@
 		  },
 		});
 	});
+	
+	  //table 渲染
+	  table.render({
+	    elem: '#saleList'
+	    ,height: 315
+	    ,url: '/v1/getdata' //数据接口
+	    ,page: true //开启分页
+		,id: 'listReload'
+	    ,cols: [[ //表头
+		  {type:'checkbox', fixed: 'left'}
+	      ,{field:'Id', title:'ID', width:60, sort: true, fixed: true}
+	      ,{field:'Name',  title:'菜品名称', width:120}
+	      ,{field:'Classify', title:'菜品分类', width:120, sort: true}
+		  ,{field: 'Pic_path', title: '菜品图片', width:'11%'
+			,templet:function(d){
+				var list=d.Pic_path.split(',')
+				//alert(list.length)
+				if(list.length!=1){
+					for(var i=0;i<list.length-1;i++){
+						return '<img src="'+'/'+list[i]+'">'				
+					}
+				}else{
+					return ""	
+				}						
+			}}
+	      //,{field:'Pic_path', title:'菜品图片', width:120}
+	      ,{field:'Sell_price', title:'菜品售价￥', width:100}
+	      ,{field:'Stocks', title:'菜品库存', width:100, sort: true}
+	      ,{field:'Stocks', title:'总销量', width:100}
+	      ,{field:'Time', title:'创建时间',  width:150, sort: true}
+		  ,{fixed: 'right', title:'操作',width:178, align:'center', toolbar: '#barDemo'}
+	    ]]
+	  });
+	  	var $ = layui.$, active = {
+            reload: function(){
+                table.reload('listReload', {
+                    where: {
+                        name: $('#dish_name').val(),
+						sell_price: $('#dish_price').val(),
+                    }
+                });
+            }
+        };	
+		$('#search').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+			return false;
+        });
+		//监听工具条
+		table.on('tool(sale)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+		    var data = obj.data //获得当前行数据
+		    ,layEvent = obj.event; //获得 lay-event 对应的值
+		    if(layEvent === 'detail'){
+		      //layer.msg('查看操作');		
+			  layer.open({
+			  type: 2,
+			  title: '查看菜品',
+			  //closeBtn: 0, //不显示关闭按钮
+			  shadeClose: true,
+			  shade: false,
+			  area: ['893px', '600px'],
+			 // offset: 'rb', //右下角弹出
+			  //time: 2000, //2秒后自动关闭
+			  maxmin: true,
+			  anim: 2,
+			  content: ['/v1/dish/show?id='+data.Id], //iframe的url，no代表不显示滚动条
+			  cancel: function(index, layero){ 
+			  if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+			    layer.close(index)
+			  }
+			  return false; 
+			  },
+		});
+	    } else if(layEvent === 'del'){
+	      layer.confirm('真的删除行么', function(index){
+	        var jsData={'id':data.Id}
+			$.post('/v1/deldata', jsData, function (out) {
+                if (out.status == 200) {
+                    layer.alert('删除成功了', {icon: 1},function(index){
+                        layer.close(index);
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+			obj.del(); //删除对应行（tr）的DOM结构
+	        layer.close(index);
+	        //向服务端发送删除指令
+	      });
+	    } else if(layEvent === 'edit'){
+	      layer.msg('编辑操作');
+		  layer.open({
+			  type: 2,
+			  title: '编辑菜品',
+			  //closeBtn: 0, //不显示关闭按钮
+			  shadeClose: true,
+			  shade: false,
+			  area: ['893px', '600px'],
+			 // offset: 'rb', //右下角弹出
+			  //time: 2000, //2秒后自动关闭
+			  maxmin: true,
+			  anim: 2,
+			  content: ['/v1/dish/edit_show?id='+data.Id], //iframe的url，no代表不显示滚动条
+			  cancel: function(index, layero){ 
+			  if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+			    layer.close(index)
+			  }
+			  return false; 
+			  },
+		});					  
+	    }
+	  });
+	//切换tab
+	 element.on('tab(docDemoTabBrief)', function(data){
+    	layer.msg('切到到:'+ this.innerHTML);
+		if(data.index==2){
+			table.reload('listReload', {
+                    where: {
+                        name: $('#dish_name').val(),
+						sell_price: $('#dish_price').val(),
+						stauts:0,
+                    }
+                });
+		}
+		if(data.index==3){
+			layer.msg(data.index)
+		}
 	});
+  });
+
 	
 	
 </script>

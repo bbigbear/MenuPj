@@ -80,12 +80,12 @@ body{padding: 10px;}
 	</div>
 	</div>
 <!--	<button class="layui-btn layui-btn-primary" id="btn1" style="width:80px;height:80px;">图片上传</button>-->
-	<label class="layui-form-mid layui-word-aux" style="margin-left:40px;">点击图片可进行删除，最多只能上传10张，大小不能超过3M</label>
+<!--	<label class="layui-form-mid layui-word-aux" style="margin-left:40px;">点击图片可进行删除，最多只能上传10张，大小不能超过3M</label>-->
   </div>
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">菜品描述</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入内容" class="layui-textarea" name="Info" id="info" value="{{.Info}}"></textarea>
+      <textarea class="layui-textarea" name="Info" id="info" value="{{.Info}}"></textarea>
     </div>
   </div>
   <div class="layui-form-item" pane>
@@ -144,7 +144,7 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 		//$("input[name='Status'][value='{{.s}}']").attr('checked', true);
 		$("input[name='Status'][value={{.s}}]").attr("checked",true);
 		$("#info").val({{.i}})
-		//layedit.build('info'); 
+		layedit.build('info'); 
 		if({{.s}}!="1"){
 			$("#time").val("")
 		}
