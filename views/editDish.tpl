@@ -212,6 +212,7 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 	function uploadForm(){
 		//alert(path_src)
 		var data={
+			'id':{{.id}},
 			'name':$("#name").val(),
 			'classify':$("#classify").val(),
 			'pic_path':path_src,
@@ -226,7 +227,7 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 			$.ajax({
 				type:"POST",
 				contentType:"application/json;charset=utf-8",
-				url:"/v1/dish/add_action",
+				url:"/v1/dish/edit_action",
 				data:JSON.stringify(data),
 				async:false,
 				error:function(request){
@@ -234,9 +235,9 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 				},
 				success:function(res){
 					if(res.code==200){
-						alert("新增成功")
+						alert("修改成功")
 					}else{
-						alert("新增失败")
+						alert("修改失败")
 					}						
 				}
 			});		

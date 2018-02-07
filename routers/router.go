@@ -14,6 +14,7 @@ func init() {
 	beego.Router("/v1/home", &controllers.HomeController{})
 	beego.Router("/v1/getdata", &controllers.HomeController{}, "*:GetData")
 	beego.Router("/v1/deldata", &controllers.HomeController{}, "*:DelData")
+	beego.Router("/v1/delmultidata", &controllers.HomeController{}, "*:DelMultiData")
 	//dish
 	beego.Router("/v1/dish/add_show", &controllers.DishController{}, "*:Add_Show")
 	beego.Router("/v1/dish/add_action", &controllers.DishController{}, "*:Add_Action")

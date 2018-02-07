@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/astaxie/beego"
 )
@@ -23,7 +24,7 @@ type BaseController struct {
 //ajax返回
 func (this *BaseController) ajaxMsg(msg interface{}, msgno int) {
 	out := make(map[string]interface{})
-	out["status"] = msgno
+	out["code"] = msgno
 	out["message"] = msg
 	this.Data["json"] = out
 	this.ServeJSON()
@@ -77,4 +78,19 @@ func (this *BaseController) PutFileImg() {
 	list["name"] = h[0].Filename
 	list["size"] = h[0].Size
 	this.ajaxList("图片上传成功", MSG_OK, 1, list)
+}
+
+//将时间化为秒
+//获取相差时间
+func getMinuteDiffer(server_time, mqtime string) int64 {
+	var minute int64
+	t1, err := time.ParseInLocation("2006-01-02 15:04:05", server_time, time.Local)
+	t2, err := time.ParseInLocation("2006-01-02 15:04:05", mqtime, time.Local)
+	if err == nil {
+		diff := t1.Unix() - t2.Unix()
+		minute = diff / 60
+		return minute
+	} else {
+		return -1
+	}
 }

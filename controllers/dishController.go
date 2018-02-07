@@ -32,11 +32,15 @@ func (this *DishController) Add_Action() {
 	list := make(map[string]interface{})
 
 	var dish_info models.Dish
+	//var order_info models.OrderTime
 	json.Unmarshal(this.Ctx.Input.RequestBody, &dish_info)
 	fmt.Println("dish_info:", &dish_info)
-	if dish_info.Time == "" {
+	if dish_info.Time == "" && dish_info.Status == 0 {
 		dish_info.Time = time.Now().Format("2006-01-02 15:04:05")
 	}
+	//	if dish_info.Status==1{
+
+	//	}
 
 	num, err := o.Insert(&dish_info)
 	if err != nil {
@@ -67,6 +71,7 @@ func (this *DishController) Edit_Show() {
 	fmt.Println("edit dish reslut num:", num)
 	this.Data["dish_info"] = maps
 	for _, m := range maps {
+		this.Data["id"] = m["Id"]
 		this.Data["c"] = m["Classify"]
 		this.Data["u"] = m["Unit"]
 		this.Data["i"] = m["Info"]
@@ -79,6 +84,22 @@ func (this *DishController) Edit_Show() {
 
 func (this *DishController) Edit_Action() {
 	this.TplName = "addDish.tpl"
+	fmt.Println("更新菜品编辑")
+	o := orm.NewOrm()
+	var dish_info models.Dish
+	json.Unmarshal(this.Ctx.Input.RequestBody, &dish_info)
+	fmt.Println("dish_info:", &dish_info)
+	num, err := o.Update(&dish_info)
+	fmt.Println("updata dish reslut num:", num)
+	if err != nil {
+		log4go.Stdout("更新菜品失败", err.Error())
+		this.ajaxMsg("更新失败", MSG_ERR_Resources)
+	}
+	if num == 0 {
+		this.ajaxMsg("更新失败", MSG_ERR_Param)
+	}
+	this.ajaxMsg("修改成功", MSG_OK)
+	return
 }
 
 func (this *DishController) Show() {

@@ -90,17 +90,17 @@
 					  <div class="layui-inline">
 					    <label class="layui-form-label">菜单名称</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
+					      <input type="text" name="dish_name" id="soldFor_name" autocomplete="off" class="layui-input">						 
 					    </div>				    
 					  </div>
 					 <div class="layui-inline">
 					    <label class="layui-form-label">菜单价格</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
+					      <input type="text" name="price_min" id="soldFor_price" autocomplete="off" class="layui-input">
 					    </div>					    
 					  </div>
 					<div class="layui-inline" style="padding-left:30px">
-						<button class="layui-btn" id="search" data-type="reload">
+						<button class="layui-btn" id="soldFor_search" data-type="reload">
 						  <i class="layui-icon">&#xe615;</i> 查询
 						</button>
 					</div>
@@ -110,9 +110,9 @@
 					  <i class="layui-icon">&#xe61f;</i>
 					  <a id="add">新增</a>	
 					  <i class="layui-icon">&#xe62f;</i>
-					  <a href="">上架</a>					
+					  <a id="soldfor_up">上架</a>					
 					  <i class="layui-icon">&#xe640;</i>
-					  <a href="">删除</a>
+					  <a id="soldfor_del">删除</a>					  
 					</span>
 					</div>	
 					<div>
@@ -122,6 +122,7 @@
 						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+						<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="sold">上架</a>
 					</script>
 					</div>				
 				  </div>
@@ -130,17 +131,17 @@
 					  <div class="layui-inline">
 					    <label class="layui-form-label">菜单名称</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
+					      <input type="text" name="dish_name" id="soldIn_name" autocomplete="off" class="layui-input">						 
 					    </div>				    
 					  </div>
 					 <div class="layui-inline">
 					    <label class="layui-form-label">菜单价格</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
+					      <input type="text" name="price_min" id="soldIn_price" autocomplete="off" class="layui-input">
 					    </div>					    
 					  </div>
 					<div class="layui-inline" style="padding-left:30px">
-						<button class="layui-btn" id="search" data-type="reload">
+						<button class="layui-btn" id="soldIn_search" data-type="reload">
 						  <i class="layui-icon">&#xe615;</i> 查询
 						</button>
 					</div>
@@ -148,16 +149,15 @@
 					<div style="padding-top:20px">
 					<span class="layui-breadcrumb" lay-separator="|">					
 					  <i class="layui-icon">&#xe601;</i>
-					  <a id="add">下架</a>						  
+					  <a id="soldin_down">下架</a>						  
 					</span>
 					</div>	
 					<div>
-					<table id="saleList" lay-filter="sale">				  
+					<table id="saleList2" lay-filter="sale">				  
 					</table>
-					<script type="text/html" id="barDemo">
-						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					<script type="text/html" id="barDemo2">
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>				
+						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="soldout">下架</a>
 					</script>
 					</div>
 				  </div>
@@ -166,17 +166,17 @@
 					  <div class="layui-inline">
 					    <label class="layui-form-label">菜单名称</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_name" autocomplete="off" class="layui-input">						 
+					      <input type="text" name="dish_name" id="soldOut_name" autocomplete="off" class="layui-input">						 
 					    </div>				    
 					  </div>
 					 <div class="layui-inline">
 					    <label class="layui-form-label">菜单价格</label>
 					    <div class="layui-input-inline" style="width: 100px;">
-					      <input type="text" name="price_min" id="dish_price" autocomplete="off" class="layui-input">
+					      <input type="text" name="price_min" id="soldOut_price" autocomplete="off" class="layui-input">
 					    </div>					    
 					  </div>
 					<div class="layui-inline" style="padding-left:30px">
-						<button class="layui-btn" id="search" data-type="reload">
+						<button class="layui-btn" id="soldOut_search" data-type="reload">
 						  <i class="layui-icon">&#xe615;</i> 查询
 						</button>
 					</div>
@@ -184,20 +184,21 @@
 					<div style="padding-top:20px">
 					<span class="layui-breadcrumb" lay-separator="|">					
 					  <i class="layui-icon">&#xe639;</i>
-					  <a id="add">编辑</a>	
+					  <a id="soldout_edit">编辑</a>	
 					  <i class="layui-icon">&#xe62f;</i>
-					  <a href="">上架</a>					
+					  <a id="soldout_up">上架</a>					
 					  <i class="layui-icon">&#xe640;</i>
-					  <a href="">删除</a>
+					  <a id="soldout_del">删除</a>
 					</span>
 					</div>	
 					<div>
-					<table id="saleList" lay-filter="sale">				  
+					<table id="saleList3" lay-filter="sale">				  
 					</table>
 					<script type="text/html" id="barDemo">
 						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+						<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="sold">上架</a>
 					</script>
 					</div>
 				  </div>
@@ -259,7 +260,7 @@
 	  table.render({
 	    elem: '#saleList'
 	    ,height: 315
-	    ,url: '/v1/getdata' //数据接口
+	    ,url: '/v1/getdata?status=1' //数据接口
 	    ,page: true //开启分页
 		,id: 'listReload'
 	    ,cols: [[ //表头
@@ -284,22 +285,55 @@
 	      ,{field:'Stocks', title:'菜品库存', width:100, sort: true}
 	      ,{field:'Stocks', title:'总销量', width:100}
 	      ,{field:'Time', title:'创建时间',  width:150, sort: true}
-		  ,{fixed: 'right', title:'操作',width:178, align:'center', toolbar: '#barDemo'}
+		  ,{fixed: 'right', title:'操作',width:200, align:'center', toolbar: '#barDemo'}
 	    ]]
 	  });
+		//点击仓库中 查询按钮
 	  	var $ = layui.$, active = {
             reload: function(){
                 table.reload('listReload', {
                     where: {
-                        name: $('#dish_name').val(),
-						sell_price: $('#dish_price').val(),
+                        name: $('#soldFor_name').val(),
+						sell_price: $('#soldFor_price').val(),
                     }
                 });
             }
         };	
-		$('#search').on('click', function(){
+		$('#soldFor_search').on('click', function(){
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
+			return false;
+        });
+		//点击销售中按钮
+		var $ = layui.$, active2 = {
+            reload: function(){
+                table.reload('listReload2', {
+                    where: {
+                        name: $('#soldIn_name').val(),
+						sell_price: $('#soldIn_price').val(),
+                    }
+                });
+            }
+        };	
+		$('#soldIn_search').on('click', function(){
+            var type = $(this).data('type');
+            active2[type] ? active2[type].call(this) : '';
+			return false;
+        });
+		//点击售罄中按钮
+		var $ = layui.$, active3 = {
+            reload: function(){
+                table.reload('listReload3', {
+                    where: {
+                        name: $('#soldOut_name').val(),
+						sell_price: $('#soldOut_price').val(),
+                    }
+                });
+            }
+        };	
+		$('#soldOut_search').on('click', function(){
+            var type = $(this).data('type');
+            active3[type] ? active3[type].call(this) : '';
 			return false;
         });
 		//监听工具条
@@ -331,10 +365,10 @@
 	      layer.confirm('真的删除行么', function(index){
 	        var jsData={'id':data.Id}
 			$.post('/v1/deldata', jsData, function (out) {
-                if (out.status == 200) {
+                if (out.code == 200) {
                     layer.alert('删除成功了', {icon: 1},function(index){
                         layer.close(index);
-                        window.location.reload();
+                        table.reload({});
                     });
                 } else {
                     layer.msg(out.message)
@@ -365,24 +399,134 @@
 			  return false; 
 			  },
 		});					  
-	    }
+	    }else if(layEvent=='sold'){
+			
+		}else if(layEvent=='soldout'){
+			
+		}
 	  });
 	//切换tab
-	 element.on('tab(docDemoTabBrief)', function(data){
+	 	element.on('tab(docDemoTabBrief)', function(data){
     	layer.msg('切到到:'+ this.innerHTML);
 		if(data.index==2){
-			table.reload('listReload', {
-                    where: {
-                        name: $('#dish_name').val(),
-						sell_price: $('#dish_price').val(),
-						stauts:0,
-                    }
-                });
+			// table.reload('listReload', {
+   //                  where: {
+   //                      name: $('#dish_name').val(),
+			// 			sell_price: $('#dish_price').val(),
+			// 			stauts:0,
+   //                  }
+   //              });
+			 //table 渲染
+		  table.render({
+		    elem: '#saleList2'
+		    ,height: 315
+		    ,url: '/v1/getdata?status=0' //数据接口
+		    ,page: true //开启分页
+			,id: 'listReload2'
+		    ,cols: [[ //表头
+			  {type:'checkbox', fixed: 'left'}
+		      ,{field:'Id', title:'ID', width:60, sort: true, fixed: true}
+		      ,{field:'Name',  title:'菜品名称', width:120}
+		      ,{field:'Classify', title:'菜品分类', width:120, sort: true}
+			  ,{field: 'Pic_path', title: '菜品图片', width:'11%'
+				,templet:function(d){
+					var list=d.Pic_path.split(',')
+					//alert(list.length)
+					if(list.length!=1){
+						for(var i=0;i<list.length-1;i++){
+							return '<img src="'+'/'+list[i]+'">'				
+						}
+					}else{
+						return ""	
+					}			
+				}}
+		      //,{field:'Pic_path', title:'菜品图片', width:120}
+		      ,{field:'Sell_price', title:'菜品售价￥', width:100}
+		      ,{field:'Stocks', title:'菜品库存', width:100, sort: true}
+		      ,{field:'Stocks', title:'总销量', width:100}
+		      ,{field:'Time', title:'创建时间',  width:150, sort: true}
+			  ,{fixed: 'right', title:'操作',width:200, align:'center', toolbar: '#barDemo2'}
+		    ]]
+		  });
 		}
 		if(data.index==3){
-			layer.msg(data.index)
+			layer.msg('切到到:'+ this.innerHTML)
+			 //table 渲染
+		  table.render({
+		    elem: '#saleList3'
+		    ,height: 315
+		    ,url: '/v1/getdata?status=2' //数据接口
+		    ,page: true //开启分页
+			,id: 'listReload3'
+		    ,cols: [[ //表头
+			  {type:'checkbox', fixed: 'left'}
+		      ,{field:'Id', title:'ID', width:60, sort: true, fixed: true}
+		      ,{field:'Name',  title:'菜品名称', width:120}
+		      ,{field:'Classify', title:'菜品分类', width:120, sort: true}
+			  ,{field: 'Pic_path', title: '菜品图片', width:'11%'
+				,templet:function(d){
+					var list=d.Pic_path.split(',')
+					//alert(list.length)
+					if(list.length!=1){
+						for(var i=0;i<list.length-1;i++){
+							return '<img src="'+'/'+list[i]+'">'				
+						}
+					}else{
+						return ""
+					}						
+				}}
+		      //,{field:'Pic_path', title:'菜品图片', width:120}
+		      ,{field:'Sell_price', title:'菜品售价￥', width:100}
+		      ,{field:'Stocks', title:'菜品库存', width:100, sort: true}
+		      ,{field:'Stocks', title:'总销量', width:100}
+		      ,{field:'Time', title:'创建时间',  width:150, sort: true}
+			  ,{fixed: 'right', title:'操作',width:200, align:'center', toolbar: '#barDemo'}
+		    ]]
+		  });
 		}
+	});	
+	//soldout del
+	$('#soldout_del').on('click',function(){				
+		var str="";
+		var checkStatus=table.checkStatus('listReload3')
+		,data=checkStatus.data;
+		if(data.length==0){
+			alert("请选择要删除的菜品")
+		}else{
+			for(var i=0;i<data.length;i++){
+				str+=data[i].Id+",";
+			}
+			layer.confirm('是否删除这'+data.length+'条数据?',{icon:3,title:'提示'},function(index){
+				//window.location.href="/v1/delmultidata?id="+str+"";
+				$.ajax({
+					type:"POST",
+					url:"/v1/delmultidata",
+					data:{
+						id:str	
+					},
+					async:false,
+					error:function(request){
+						alert("post error")						
+					},
+					success:function(res){
+						if(res.code==200){
+							alert("删除成功")	
+							//重载表格
+							table.reload('listReload3', {							  
+							});												
+						}else{
+							alert("删除失败")
+						}						
+					}					
+				});
+				
+				layer.close(index);
+			});
+		}
+		return false;
 	});
+	
+		
   });
 
 	
