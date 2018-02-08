@@ -236,6 +236,7 @@ layui.use(['form','laydate','upload','jquery','layedit'], function(){
 				success:function(res){
 					if(res.code==200){
 						alert("修改成功")
+						window.location.reload();
 					}else{
 						alert("修改失败")
 					}						

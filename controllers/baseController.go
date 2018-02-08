@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/toolbox"
 )
 
 const (
@@ -81,8 +82,19 @@ func (this *BaseController) PutFileImg() {
 }
 
 //将时间化为秒
+func (this *BaseController) GetSecs(ordertime string) int64 {
+	var s int64
+	t, err := time.ParseInLocation("2006-01-02 15:04:05", ordertime, time.Local)
+	if err == nil {
+		s = t.Unix()
+		return s
+	} else {
+		return -1
+	}
+}
+
 //获取相差时间
-func getMinuteDiffer(server_time, mqtime string) int64 {
+func (this *BaseController) GetMinuteDiffer(server_time, mqtime string) int64 {
 	var minute int64
 	t1, err := time.ParseInLocation("2006-01-02 15:04:05", server_time, time.Local)
 	t2, err := time.ParseInLocation("2006-01-02 15:04:05", mqtime, time.Local)
@@ -93,4 +105,18 @@ func getMinuteDiffer(server_time, mqtime string) int64 {
 	} else {
 		return -1
 	}
+}
+
+func TimeTask() {
+	//定期上架
+	fmt.Println("定时执行")
+
+	tk1 := toolbox.NewTask("tk1", "0/1 * * * * *", func() error {
+		//fmt.Println("tk1")
+
+		return nil
+	})
+	toolbox.AddTask("tk1", tk1)
+	toolbox.StartTask()
+
 }

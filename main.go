@@ -4,6 +4,7 @@ import (
 	_ "MenuPj/routers"
 	"fmt"
 
+	"MenuPj/controllers"
 	"MenuPj/models"
 
 	_ "github.com/Go-SQL-Driver/MySQL"
@@ -27,6 +28,8 @@ func main() {
 	orm.Debug = true
 	orm.RunSyncdb("default", false, true)
 	beego.Run()
+	//定时
+	controllers.TimeTask()
 }
 func DBConnection() {
 	fmt.Println("初始化数据库")
@@ -37,5 +40,6 @@ func DBConnection() {
 func RegisterModel() {
 	fmt.Println("注册数据库模型")
 	orm.RegisterModel(new(models.Dish))
+	orm.RegisterModel(new(models.OrderTime))
 
 }

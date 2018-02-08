@@ -32,22 +32,30 @@ func (this *DishController) Add_Action() {
 	list := make(map[string]interface{})
 
 	var dish_info models.Dish
-	//var order_info models.OrderTime
+	var order_info models.OrderTime
 	json.Unmarshal(this.Ctx.Input.RequestBody, &dish_info)
 	fmt.Println("dish_info:", &dish_info)
 	if dish_info.Time == "" && dish_info.Status == 0 {
 		dish_info.Time = time.Now().Format("2006-01-02 15:04:05")
 	}
-	//	if dish_info.Status==1{
-
-	//	}
 
 	num, err := o.Insert(&dish_info)
 	if err != nil {
 		log4go.Stdout("新增菜品失败", err.Error())
 		this.ajaxMsg("新增失败", MSG_ERR_Resources)
 	}
-	fmt.Println("num", num)
+	fmt.Println("自增Id(num)", num)
+	//插入时间数据库
+	if dish_info.Status == 1 {
+		order_info.Secs = this.GetSecs(dish_info.Time)
+		order_info.Did = num
+		num, err := o.Insert(&order_info)
+		if err != nil {
+			log4go.Stdout("插入预约时间失败", err.Error())
+			this.ajaxMsg("插入预约时间失败", MSG_ERR_Resources)
+		}
+		fmt.Println("自增order_Id(num)", num)
+	}
 	list["id"] = num
 	this.ajaxList("新增成功", MSG_OK, 1, list)
 	return
